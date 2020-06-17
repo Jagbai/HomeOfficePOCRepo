@@ -112,7 +112,7 @@ def consume_from_sqs(message):
 
     # detect entities
     responses = process_document(local_path)
-    responses["Key"] = 'https://homeofficebucket.s3.amazonaws.com/'+key
+    responses["Key"] = 'https://'+BUCKET_NAME+'.s3.amazonaws.com/'+key
     return responses
 
 
