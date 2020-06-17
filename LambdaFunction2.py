@@ -105,7 +105,6 @@ def consume_from_sqs(message):
 
     body = json.loads(message.body)
     key = body['Records'][0]['s3']['object']['key']
-    ip = body['Records'][0]['requestParameters']['sourceIPAddress']
 
     local_path = "/tmp/"+"{}".format(key)
 
@@ -113,14 +112,12 @@ def consume_from_sqs(message):
 
     # detect entities
     responses = process_document(local_path)
-    responses["Id"] = ip
     responses["Key"] = 'https://homeofficebucket.s3.amazonaws.com/'+key
     return responses
 
 
-def create_es_document(customer_id, entites, sentiment, key_phrases, s3_location, timestamp):
+def create_es_document(entites, sentiment, key_phrases, s3_location, timestamp):
     return {
-        "customerId": customer_id,
         "entities": entites,
         "sentiment": sentiment,
         "keyPhrases": key_phrases,
