@@ -11,6 +11,8 @@ def lambda_handler(event, context):
     url = 'https://www.parliament.uk/business/news/2020/april1/prime-ministers-questions-29-april/'
     filename = 'newscrapertext8.txt'
     localpath = '/tmp/' + filename
+    BUCKET_NAME = "homeofficebucket"
+    INVOKED_FUNCTION = 'arn:aws:lambda:eu-west-2:438542434507:function:comprehendfunction'
     with open(localpath, "r") as f:
         for timestamp in f:
             pass
@@ -26,10 +28,10 @@ def lambda_handler(event, context):
     f.write(textdoc)
     f.write(date)
     f.close()
-    s3_client.upload_file(localpath, 'homeofficebucket', filename)
+    s3_client.upload_file(localpath, BUCKET_NAME, filename)
 
     response = lambda_client.invoke(
-        FunctionName='arn:aws:lambda:eu-west-2:438542434507:function:comprehendfunction',
+        FunctionName=INVOKED_FUNCTION,
         InvocationType='Event',
         Payload='{}'
     )
