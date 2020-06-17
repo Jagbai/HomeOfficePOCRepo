@@ -142,7 +142,7 @@ def lambda_handler(event, context):
 
         # message.delete()
 
-        doc = create_es_document(responses["Id"], responses["entites"],
+        doc = create_es_document(responses["entites"],
                                  responses["sentiment"], responses["key_phrases"], responses["Key"], responses["timestamp"])
         index_to_es(doc, "homeeofficelibrary")
     return {
