@@ -1,0 +1,30 @@
+PUT /homeeofficelibrary/document/_mapping
+{
+    "document": {
+        "properties": {
+            "title": {
+                "type": "text"
+            },
+            "data": {
+                "type": "binary",
+                "doc_values": false,
+                "store": false
+            },
+            "entities": {
+                "type": "text"
+            },
+            "keyPhrases": {
+                "type": "text"
+            },
+            "sentiment": {
+                "type": "text"
+            },
+            "s3Location": {
+                "type": "text"
+            },
+            "timestamp": {
+                "type": "text"
+            }
+        }
+    }
+}
