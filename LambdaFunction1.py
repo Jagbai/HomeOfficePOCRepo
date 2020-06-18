@@ -13,10 +13,6 @@ def lambda_handler(event, context):
     localpath = '/tmp/' + filename
     BUCKET_NAME = "homeofficebucket"
     INVOKED_FUNCTION = 'arn:aws:lambda:eu-west-2:438542434507:function:comprehendfunction'
-    with open(localpath, "r") as f:
-        for timestamp in f:
-            pass
-    print(timestamp)
     req = requests.get(url)
     soup = BeautifulSoup(req.content, 'html.parser')
     for i in soup.findAll('meta'):
